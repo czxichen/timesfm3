@@ -1,0 +1,17 @@
+[package]
+name = "timesfm3"
+version = "0.1.0"
+edition = "2024"
+description = "Dedicated Rust inference engine for Google TimesFM 3.0 (no tch-rs / candle)."
+license = "Apache-2.0"
+
+[dependencies]
+rayon = "1.10"
+memmap2 = "0.9"
+matrixmultiply = "0.3"
+num_cpus = "1.17.0"
+half = "2.7.1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

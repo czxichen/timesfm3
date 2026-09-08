@@ -1,0 +1,37 @@
+{
+  "exchange": {
+    "csv": "data\\exchange.csv",
+    "variates": 8,
+    "steps": 7588,
+    "note": "daily FX rates, 8 countries, 7588 steps",
+    "source_variates": 8
+  },
+  "electricity": {
+    "csv": "data\\electricity.csv",
+    "variates": 24,
+    "steps": 26304,
+    "note": "hourly household power load (321v -> 24v), 26304 steps",
+    "source_variates": 321
+  },
+  "solar": {
+    "csv": "data\\solar.csv",
+    "variates": 24,
+    "steps": 52560,
+    "note": "10-min solar power (137v -> 24v), 52560 steps",
+    "source_variates": 137
+  },
+  "traffic": {
+    "csv": "data\\traffic.csv",
+    "variates": 24,
+    "steps": 17544,
+    "note": "hourly road occupancy (862v -> 24v), 17544 steps",
+    "source_variates": 862
+  },
+  "electricity64": {
+    "csv": "data\\electricity64.csv",
+    "variates": 64,
+    "steps": 26304,
+    "note": "wide real table: 64 variates, 26304 steps",
+    "source_variates": 321
+  }
+}

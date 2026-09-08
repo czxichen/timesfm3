@@ -1,0 +1,6003 @@
+{
+  "scenarios": [
+    {
+      "name": "etth1_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h24.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 7 variates, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h96.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 7 variates, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h168.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 7 variates, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h336.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 7 variates, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h720.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 7 variates, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_h24.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 7 variates, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_h96.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 7 variates, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_h168.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 7 variates, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_h336.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 7 variates, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_h720.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 7 variates, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_h24.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 7 variates, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_h96.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 7 variates, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_h168.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 7 variates, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_h336.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 7 variates, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_h720.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 7 variates, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_h24.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 7 variates, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_h96.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 7 variates, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_h168.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 7 variates, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_h336.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 7 variates, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_h720.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 7 variates, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_h24.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 7 variates, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_h96.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 7 variates, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_h168.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 7 variates, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_h336.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 7 variates, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_h720.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 7 variates, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_h24.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 7 variates, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_h96.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 7 variates, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_h168.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 7 variates, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_h336.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 7 variates, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_h720.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 7 variates, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_h24.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 7 variates, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_h96.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 7 variates, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_h168.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 7 variates, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_h336.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 7 variates, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_h720.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 7 variates, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h1440",
+      "horizon": 1440,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h1440.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "long horizon 1440, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 1440,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_h1440",
+      "horizon": 1440,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_h1440.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "long horizon 1440, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 1440,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h1_uni",
+      "horizon": 1,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h1_uni.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "sub-window horizon 1, univariate edge case",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 1,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h12_uni",
+      "horizon": 12,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h12_uni.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "sub-window horizon 12, univariate edge case",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 12,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_h48_uni",
+      "horizon": 48,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_h48_uni.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "sub-window horizon 48, univariate edge case",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 48,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx1024.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, dataset etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_ctx1024.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, dataset etth2",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_ctx1024.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm1_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, dataset ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_ctx1024.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, dataset ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_ctx1024.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, dataset synth_ts",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_ctx1024.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_scale_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_scale_ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, dataset synth_scale",
+      "dims": {
+        "source": "synth_scale",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_ctx1024.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_flat_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_flat_ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, dataset synth_flat",
+      "dims": {
+        "source": "synth_flat",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx15360",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx15360.csv",
+          "variates": 7,
+          "context_len": 15360
+        }
+      ],
+      "note": "context exactly at 15360 cap, etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 15360,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth2_ctx17020",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth2_ctx17020.csv",
+          "variates": 7,
+          "context_len": 17020
+        }
+      ],
+      "note": "context 17020 > cap, etth2; expect truncation",
+      "dims": {
+        "source": "etth2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 17020,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx32_uni",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx32_uni.csv",
+          "variates": 1,
+          "context_len": 32
+        }
+      ],
+      "note": "tiny context 32, univariate edge case",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 32,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx48_uni",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx48_uni.csv",
+          "variates": 1,
+          "context_len": 48
+        }
+      ],
+      "note": "tiny context 48, univariate edge case",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 48,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_ctx64_uni",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_ctx64_uni.csv",
+          "variates": 1,
+          "context_len": 64
+        }
+      ],
+      "note": "tiny context 64, univariate edge case",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_v1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_v1.csv",
+          "variates": 1,
+          "context_len": 1024
+        }
+      ],
+      "note": "1 variates of etth1, ctx 1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_v2",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_v2.csv",
+          "variates": 2,
+          "context_len": 1024
+        }
+      ],
+      "note": "2 variates of etth1, ctx 1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 2,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_v3",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_v3.csv",
+          "variates": 3,
+          "context_len": 1024
+        }
+      ],
+      "note": "3 variates of etth1, ctx 1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 3,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_v5",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_v5.csv",
+          "variates": 5,
+          "context_len": 1024
+        }
+      ],
+      "note": "5 variates of etth1, ctx 1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 5,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_v10",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_v10.csv",
+          "variates": 10,
+          "context_len": 1024
+        }
+      ],
+      "note": "10 variates, ctx 1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 10,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_v20",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_v20.csv",
+          "variates": 20,
+          "context_len": 512
+        }
+      ],
+      "note": "20 variates, ctx 512",
+      "dims": {
+        "source": "synth_v20",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 20,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_v50",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_v50.csv",
+          "variates": 50,
+          "context_len": 256
+        }
+      ],
+      "note": "50 variates, ctx 256",
+      "dims": {
+        "source": "synth_v50",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 50,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_batch2_eq",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_batch2_w0.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch2_w1.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "equal-length batch of 2 x 7v ctx1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 14,
+        "batch": 2
+      }
+    },
+    {
+      "name": "etth1_batch4_eq",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_batch4_w0.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch4_w1.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch4_w2.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch4_w3.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "equal-length batch of 4 x 7v ctx1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 28,
+        "batch": 4
+      }
+    },
+    {
+      "name": "etth1_batch8_eq",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_batch8_w0.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch8_w1.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch8_w2.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch8_w3.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch8_w4.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch8_w5.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch8_w6.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_batch8_w7.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "equal-length batch of 8 x 7v ctx1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 56,
+        "batch": 8
+      }
+    },
+    {
+      "name": "etth1_mixed8_uni",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_mix_c64.csv",
+          "variates": 1,
+          "context_len": 64
+        },
+        {
+          "csv": "data/scenarios/etth1_mix_c128.csv",
+          "variates": 1,
+          "context_len": 128
+        },
+        {
+          "csv": "data/scenarios/etth1_mix_c256.csv",
+          "variates": 1,
+          "context_len": 256
+        },
+        {
+          "csv": "data/scenarios/etth1_mix_c512.csv",
+          "variates": 1,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/etth1_mix_c1024.csv",
+          "variates": 1,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/etth1_mix_c1536.csv",
+          "variates": 1,
+          "context_len": 1536
+        },
+        {
+          "csv": "data/scenarios/etth1_mix_c2048.csv",
+          "variates": 1,
+          "context_len": 2048
+        },
+        {
+          "csv": "data/scenarios/etth1_mix_c3072.csv",
+          "variates": 1,
+          "context_len": 3072
+        }
+      ],
+      "note": "8 univariate mixed lengths 64..3072, etth1 OT",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 8,
+        "batch": 8
+      }
+    },
+    {
+      "name": "ettm1_mixed5_uni",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm1_mix_c64.csv",
+          "variates": 1,
+          "context_len": 64
+        },
+        {
+          "csv": "data/scenarios/ettm1_mix_c128.csv",
+          "variates": 1,
+          "context_len": 128
+        },
+        {
+          "csv": "data/scenarios/ettm1_mix_c256.csv",
+          "variates": 1,
+          "context_len": 256
+        },
+        {
+          "csv": "data/scenarios/ettm1_mix_c512.csv",
+          "variates": 1,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/ettm1_mix_c1024.csv",
+          "variates": 1,
+          "context_len": 1024
+        }
+      ],
+      "note": "5 univariate mixed lengths from 15-min ettm1",
+      "dims": {
+        "source": "ettm1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 5,
+        "batch": 5
+      }
+    },
+    {
+      "name": "mixed_batch_etth1xetth2",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/mb_etth1.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/mb_etth2.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "cross-dataset equal batch: etth1 + etth2, 7v each",
+      "dims": {
+        "source": "mixed",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 14,
+        "batch": 2
+      }
+    },
+    {
+      "name": "etth1_nan_light",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_nan_light.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "scattered ~2% NaN",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_nan_heavy",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_nan_heavy.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "heavy ~50% NaN",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "etth1_nan_allcol",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/etth1_nan_allcol.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "one whole variate NaN + scattered",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ettm2_nan_light",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ettm2_nan_light.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "scattered ~2% NaN on 15-min ettm2",
+      "dims": {
+        "source": "ettm2",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "synth_ts_nan_heavy",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/synth_ts_nan_heavy.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "heavy ~50% NaN on synth trend series",
+      "dims": {
+        "source": "synth_ts",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so0_mp0_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": false,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so0, mp0, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so0_mp0_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": false,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so0, mp0, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so1_mp0_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so1, mp0, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so1_mp0_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so1, mp0, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so0_mp1_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": true,
+        "sort_quantiles": false,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so0, mp1, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so0_mp1_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": false,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so0, mp1, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so1_mp1_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so1, mp1, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so1_mp1_zn0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so1, mp1, zn0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so0_mp0_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": false,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so0, mp0, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so0_mp0_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": false,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so0, mp0, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so1_mp0_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so1, mp0, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so1_mp0_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so1, mp0, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so0_mp1_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": true,
+        "sort_quantiles": false,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so0, mp1, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so0_mp1_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": false,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so0, mp1, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy0_so1_mp1_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy0, so1, mp1, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_flags_sy1_so1_mp1_zn1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "flag grid: sy1, so1, mp1, zn1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt0_cp0_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt0, cp0, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt0_cp0_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt0, cp0, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt1_cp0_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt1, cp0, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt1_cp0_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt1, cp0, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt0_cp1_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt0, cp1, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt0_cp1_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt0, cp1, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt1_cp1_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt1, cp1, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt1_cp1_fr0",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt1, cp1, fr0",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt0_cp0_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt0, cp0, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt0_cp0_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt0, cp0, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt1_cp0_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt1, cp0, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt1_cp0_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": false,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt1, cp0, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt0_cp1_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt0, cp1, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt0_cp1_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": false,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt0, cp1, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st0_dt1_cp1_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st0, dt1, cp1, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fg_ovr_st1_dt1_cp1_fr1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": true,
+        "use_linear_detrending": true,
+        "use_iterative_cpm_revin": true,
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fg_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "override grid: st1, dt1, cp1, fr1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_etth2_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_etth2_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "znorm ON, dataset etth2",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_etth2_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_etth2_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON, dataset etth2",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_ettm1_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_ettm1_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "znorm ON, dataset ettm1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_ettm1_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_ettm1_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON, dataset ettm1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_ettm2_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_ettm2_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "znorm ON, dataset ettm2",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_ettm2_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_ettm2_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON, dataset ettm2",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_synth_ts_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_synth_ts_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "znorm ON, dataset synth_ts",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_synth_ts_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_synth_ts_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON, dataset synth_ts",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_synthflat_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/fx_synthflat_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON on strictly-negative synth data",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_etth1_znorm_nocpm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {
+        "use_iterative_cpm_revin": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fx_etth1_zn_cpm.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "znorm ON + CPM OFF combined, 7v etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "fx_etth1_nosym_nostitch",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/fx_etth1_ns_stitch.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "symmetric OFF + stitching OFF combined, 7v etth1",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "h24_multi",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h24_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "h96_multi",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h96_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "h168_multi",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h168_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "h336_multi",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h336_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "h720_multi",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h720_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context sweep, 7 variates",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ctx_cap_17k",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx_cap_17k.csv",
+          "variates": 7,
+          "context_len": 17020
+        }
+      ],
+      "note": "context 17020 > 15360 cap; expect identical truncation",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 17020,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "uni_1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/uni_1024.csv",
+          "variates": 1,
+          "context_len": 1024
+        }
+      ],
+      "note": "univariate OT, ctx 1024",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "nan_mixed",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/nan_mixed.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "leading strip 96 + interior 64-block + ~3% scattered + trailing 16",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "batch2_multi",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/batch2_multi_w4096.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/batch2_multi_w12000.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "two 7-variate series in ONE predict_batch call",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 14,
+        "batch": 2
+      }
+    },
+    {
+      "name": "batch8_mixed_uni",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/batch8_uni_c64.csv",
+          "variates": 1,
+          "context_len": 64
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c128.csv",
+          "variates": 1,
+          "context_len": 128
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c256.csv",
+          "variates": 1,
+          "context_len": 256
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c512.csv",
+          "variates": 1,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c1024.csv",
+          "variates": 1,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c1536.csv",
+          "variates": 1,
+          "context_len": 1536
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c2048.csv",
+          "variates": 1,
+          "context_len": 2048
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c3072.csv",
+          "variates": 1,
+          "context_len": 3072
+        }
+      ],
+      "note": "8 univariate series, ctx 64..3072 -> dynamic batch context 3072 + left padding",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 8,
+        "batch": 8
+      }
+    },
+    {
+      "name": "flag_nosym",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "symmetric averaging OFF",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "flag_nosort",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": false,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "quantile sorting OFF (raw quantile order compared)",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "flag_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON (clamps negatives)",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "flag_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "per-row z-normalization ON",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 7,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ovr_stitch_off",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_stitching=False",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ovr_cpm_off",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_iterative_cpm_revin": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_iterative_cpm_revin=False",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ovr_detrend_off",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_linear_detrending": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_linear_detrending=False",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "ovr_frozen_stats",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_frozen_running_stats=True",
+      "dims": {
+        "source": "etth1",
+        "family": "legacy",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_h24.csv",
+          "variates": 8,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 8 variates, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-horizon",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_h96.csv",
+          "variates": 8,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 8 variates, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-horizon",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_h168.csv",
+          "variates": 8,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 8 variates, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-horizon",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_h336.csv",
+          "variates": 8,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 8 variates, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-horizon",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_h720.csv",
+          "variates": 8,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 8 variates, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-horizon",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_h24.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 24 variates, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-horizon",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_h96.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 24 variates, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-horizon",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_h168.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 24 variates, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-horizon",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_h336.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 24 variates, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-horizon",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_h720.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 24 variates, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-horizon",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_h24.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 24 variates, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-horizon",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_h96.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 24 variates, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-horizon",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_h168.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 24 variates, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-horizon",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_h336.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 24 variates, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-horizon",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_h720.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 24 variates, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-horizon",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_h24",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_h24.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 24, 24 variates, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-horizon",
+        "horizon": 24,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_h96.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 96, 24 variates, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-horizon",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_h168",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_h168.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 168, 24 variates, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-horizon",
+        "horizon": 168,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_h336.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 336, 24 variates, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-horizon",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_h720",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_h720.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon 720, 24 variates, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-horizon",
+        "horizon": 720,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_ctx64.csv",
+          "variates": 8,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_ctx256.csv",
+          "variates": 8,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_ctx1024.csv",
+          "variates": 8,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_ctx3072.csv",
+          "variates": 8,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_ctx64.csv",
+          "variates": 24,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_ctx256.csv",
+          "variates": 24,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_ctx1024.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_ctx3072.csv",
+          "variates": 24,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_ctx64.csv",
+          "variates": 24,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_ctx256.csv",
+          "variates": 24,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_ctx1024.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_ctx3072.csv",
+          "variates": 24,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, real source solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_ctx64.csv",
+          "variates": 24,
+          "context_len": 64
+        }
+      ],
+      "note": "context 64, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 64,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_ctx256.csv",
+          "variates": 24,
+          "context_len": 256
+        }
+      ],
+      "note": "context 256, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 256,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_ctx1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_ctx1024.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "context 1024, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_ctx3072.csv",
+          "variates": 24,
+          "context_len": 3072
+        }
+      ],
+      "note": "context 3072, real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity64_h96",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity64_h96.csv",
+          "variates": 64,
+          "context_len": 1024
+        }
+      ],
+      "note": "64-variate real table, horizon 96",
+      "dims": {
+        "source": "electricity64",
+        "family": "source-x-horizon",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 64,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity64_h336",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity64_h336.csv",
+          "variates": 64,
+          "context_len": 1024
+        }
+      ],
+      "note": "64-variate real table, horizon 336",
+      "dims": {
+        "source": "electricity64",
+        "family": "source-x-horizon",
+        "horizon": 336,
+        "context_len": 1024,
+        "variates": 64,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity64_ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity64_ctx3072.csv",
+          "variates": 64,
+          "context_len": 3072
+        }
+      ],
+      "note": "64-variate real table, context 3072",
+      "dims": {
+        "source": "electricity64",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 3072,
+        "variates": 64,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_v1",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_v1.csv",
+          "variates": 1,
+          "context_len": 1024
+        }
+      ],
+      "note": "1 variates of real electricity, ctx 1024",
+      "dims": {
+        "source": "electricity",
+        "family": "variates",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 1,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_v4",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_v4.csv",
+          "variates": 4,
+          "context_len": 1024
+        }
+      ],
+      "note": "4 variates of real electricity, ctx 1024",
+      "dims": {
+        "source": "electricity",
+        "family": "variates",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 4,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_v12",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_v12.csv",
+          "variates": 12,
+          "context_len": 1024
+        }
+      ],
+      "note": "12 variates of real electricity, ctx 1024",
+      "dims": {
+        "source": "electricity",
+        "family": "variates",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 12,
+        "batch": 1
+      }
+    },
+    {
+      "name": "electricity_v24",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_v24.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "24 variates of real electricity, ctx 1024",
+      "dims": {
+        "source": "electricity",
+        "family": "variates",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "xsrc_batch4_eq",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xsrc_traffic.csv",
+          "variates": 24,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/xsrc_elec.csv",
+          "variates": 24,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/xsrc_solar.csv",
+          "variates": 24,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/xsrc_elec2.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "equal-length batch of 4 series from DIFFERENT real sources (24v each)",
+      "dims": {
+        "source": "mixed",
+        "family": "batch",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 96,
+        "batch": 4
+      }
+    },
+    {
+      "name": "xsrc_batch2_mixlen",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xsrc_solar_c512.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_traffic_c2048.csv",
+          "variates": 24,
+          "context_len": 2048
+        }
+      ],
+      "note": "mixed-length batch across solar(512) + traffic(2048)",
+      "dims": {
+        "source": "mixed",
+        "family": "batch",
+        "horizon": 96,
+        "context_len": 2048,
+        "variates": 48,
+        "batch": 2
+      }
+    },
+    {
+      "name": "xsrc_batch8_eq",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xsrc_b8_0.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_b8_1.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_b8_2.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_b8_3.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_b8_4.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_b8_5.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_b8_6.csv",
+          "variates": 24,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/xsrc_b8_7.csv",
+          "variates": 24,
+          "context_len": 512
+        }
+      ],
+      "note": "equal-length batch of 8 series from 3 real sources (24v, ctx512)",
+      "dims": {
+        "source": "mixed",
+        "family": "batch",
+        "horizon": 96,
+        "context_len": 512,
+        "variates": 192,
+        "batch": 8
+      }
+    },
+    {
+      "name": "electricity_nan_light",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/electricity_nan_light.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "NaN robustness: light on real source electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "nan",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "traffic_nan_heavy",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/traffic_nan_heavy.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "NaN robustness: heavy on real source traffic",
+      "dims": {
+        "source": "traffic",
+        "family": "nan",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "exchange_nan_allcol",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/exchange_nan_allcol.csv",
+          "variates": 8,
+          "context_len": 1024
+        }
+      ],
+      "note": "NaN robustness: allcol on real source exchange",
+      "dims": {
+        "source": "exchange",
+        "family": "nan",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 8,
+        "batch": 1
+      }
+    },
+    {
+      "name": "xf_electricity_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xf_electricity_base.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "znorm ON, real electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "flag-x-source",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "xf_electricity_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xf_electricity_base.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON, real electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "flag-x-source",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "xf_electricity_nosym",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xf_electricity_base.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "symmetric averaging OFF, real electricity",
+      "dims": {
+        "source": "electricity",
+        "family": "flag-x-source",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "xf_solar_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xf_solar_base.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "znorm ON, real solar",
+      "dims": {
+        "source": "solar",
+        "family": "flag-x-source",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "xf_solar_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xf_solar_base.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON, real solar",
+      "dims": {
+        "source": "solar",
+        "family": "flag-x-source",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "xf_solar_nosym",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/xf_solar_base.csv",
+          "variates": 24,
+          "context_len": 1024
+        }
+      ],
+      "note": "symmetric averaging OFF, real solar",
+      "dims": {
+        "source": "solar",
+        "family": "flag-x-source",
+        "horizon": 96,
+        "context_len": 1024,
+        "variates": 24,
+        "batch": 1
+      }
+    },
+    {
+      "name": "solar_ctx8192",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/solar_ctx8192.csv",
+          "variates": 24,
+          "context_len": 8192
+        }
+      ],
+      "note": "long context 8192 on real 10-min solar",
+      "dims": {
+        "source": "solar",
+        "family": "source-x-context",
+        "horizon": 96,
+        "context_len": 8192,
+        "variates": 24,
+        "batch": 1
+      }
+    }
+  ]
+}

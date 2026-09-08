@@ -1,0 +1,451 @@
+{
+  "scenarios": [
+    {
+      "name": "h24_multi",
+      "horizon": 24,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h24_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates"
+    },
+    {
+      "name": "h96_multi",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h96_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates"
+    },
+    {
+      "name": "h168_multi",
+      "horizon": 168,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h168_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates"
+    },
+    {
+      "name": "h336_multi",
+      "horizon": 336,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h336_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates"
+    },
+    {
+      "name": "h720_multi",
+      "horizon": 720,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/h720_multi.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "horizon sweep, 7 variates"
+    },
+    {
+      "name": "ctx64",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx64.csv",
+          "variates": 7,
+          "context_len": 64
+        }
+      ],
+      "note": "context sweep, 7 variates"
+    },
+    {
+      "name": "ctx256",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx256.csv",
+          "variates": 7,
+          "context_len": 256
+        }
+      ],
+      "note": "context sweep, 7 variates"
+    },
+    {
+      "name": "ctx3072",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx3072.csv",
+          "variates": 7,
+          "context_len": 3072
+        }
+      ],
+      "note": "context sweep, 7 variates"
+    },
+    {
+      "name": "ctx_cap_17k",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/ctx_cap_17k.csv",
+          "variates": 7,
+          "context_len": 17020
+        }
+      ],
+      "note": "context 17020 > 15360 cap; expect identical truncation"
+    },
+    {
+      "name": "uni_1024",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/uni_1024.csv",
+          "variates": 1,
+          "context_len": 1024
+        }
+      ],
+      "note": "univariate OT, ctx 1024"
+    },
+    {
+      "name": "nan_mixed",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/nan_mixed.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "leading strip 96 + interior 64-block + ~3% scattered + trailing 16"
+    },
+    {
+      "name": "batch2_multi",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/batch2_multi_w4096.csv",
+          "variates": 7,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/batch2_multi_w12000.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "two 7-variate series in ONE predict_batch call"
+    },
+    {
+      "name": "batch8_mixed_uni",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/batch8_uni_c64.csv",
+          "variates": 1,
+          "context_len": 64
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c128.csv",
+          "variates": 1,
+          "context_len": 128
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c256.csv",
+          "variates": 1,
+          "context_len": 256
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c512.csv",
+          "variates": 1,
+          "context_len": 512
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c1024.csv",
+          "variates": 1,
+          "context_len": 1024
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c1536.csv",
+          "variates": 1,
+          "context_len": 1536
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c2048.csv",
+          "variates": 1,
+          "context_len": 2048
+        },
+        {
+          "csv": "data/scenarios/batch8_uni_c3072.csv",
+          "variates": 1,
+          "context_len": 3072
+        }
+      ],
+      "note": "8 univariate series, ctx 64..3072 -> dynamic batch context 3072 + left padding"
+    },
+    {
+      "name": "flag_nosym",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": false,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "symmetric averaging OFF"
+    },
+    {
+      "name": "flag_nosort",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": false,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "quantile sorting OFF (raw quantile order compared)"
+    },
+    {
+      "name": "flag_makepos",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": true,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "make_positive ON (clamps negatives)"
+    },
+    {
+      "name": "flag_znorm",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": true
+      },
+      "model_overrides": {},
+      "series": [
+        {
+          "csv": "data/scenarios/flag_base.csv",
+          "variates": 7,
+          "context_len": 1024
+        }
+      ],
+      "note": "per-row z-normalization ON"
+    },
+    {
+      "name": "ovr_stitch_off",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_stitching": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_stitching=False"
+    },
+    {
+      "name": "ovr_cpm_off",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_iterative_cpm_revin": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_iterative_cpm_revin=False"
+    },
+    {
+      "name": "ovr_detrend_off",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_linear_detrending": false
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_linear_detrending=False"
+    },
+    {
+      "name": "ovr_frozen_stats",
+      "horizon": 96,
+      "flags": {
+        "use_symmetric_averaging": true,
+        "make_positive": false,
+        "sort_quantiles": true,
+        "use_znorm": false
+      },
+      "model_overrides": {
+        "use_frozen_running_stats": true
+      },
+      "series": [
+        {
+          "csv": "data/scenarios/ovr_uni512.csv",
+          "variates": 1,
+          "context_len": 512
+        }
+      ],
+      "note": "use_frozen_running_stats=True"
+    }
+  ]
+}
