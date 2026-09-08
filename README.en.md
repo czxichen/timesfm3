@@ -3,15 +3,15 @@
 [简体中文](README.md) · **English**
 
 <p align="center">
-<img alt="Pure Rust" src="https://img.shields.io/badge/Rust-proprietary_engine-orange">
+<img alt="Pure Rust" src="https://img.shields.io/badge/Rust-inference_engine-orange">
 <img alt="License" src="https://img.shields.io/badge/License-Apache--2.0-blue">
 <img alt="Runtime deps" src="https://img.shields.io/badge/runtime_deps-zero-green">
 <img alt="Binary" src="https://img.shields.io/badge/Release_Binary-~1.1MB-purple">
 </p>
 
-A high-performance **proprietary pure-Rust inference engine** purpose-built for Google **TimesFM 3.0**, the time-series foundation model.
+A high-performance **pure-Rust inference engine** purpose-built for Google **TimesFM 3.0**, the time-series foundation model.
 
-Every time-series attention and math operator is implemented from scratch — **no `tch-rs`, no `candle`, no Python runtime**. Hot paths run on Rayon multithreading plus hand-written SIMD microkernels (x86_64 AVX2+FMA+F16C and aarch64 NEON). The statically linked Release binary is only ~**1.1 MB** and starts instantly.
+**No `tch-rs`, no `candle`, no Python runtime**; hot paths run on Rayon multithreading plus SIMD microkernels (x86_64 AVX2+FMA+F16C and aarch64 NEON). The statically linked Release binary is only ~**1.1 MB** and starts instantly.
 
 ---
 
@@ -33,7 +33,7 @@ Every time-series attention and math operator is implemented from scratch — **
   2. **Extremely lightweight** — inference-only: no backprop or gradient storage, preallocated hot-path memory, ~**1.1 MB** statically linked Release binary.
   3. **Strict official-accuracy alignment** — floating-point agreement down to $10^{-5}$ (see the accuracy benchmark below).
 - **Highlights**:
-  - **Self-written operators, no black boxes**: CPU tiled online softmax (FlashAttention-style; causal FLOPs halved), N-axis column-partitioned GEMM, hand-written RMSNorm / PerDimScale / static RoPE lookup tables;
+  - **Standalone operator implementations**: CPU tiled online softmax (FlashAttention-style; causal FLOPs halved), N-axis column-partitioned GEMM, RMSNorm / PerDimScale / static RoPE lookup tables;
   - **Native SIMD + multithreading**: x86_64 AVX2/F16C and aarch64 NEON kernels; Rayon-parallelized over the flattened batch×head axis, so even a single sequence saturates all cores;
   - **Zero-copy checkpoint loading**: `memmap2`-based safetensors parsing plus a built-in ~150-line recursive-descent JSON parser; FP16 weights are transposed directly in half domain, so half-precision checkpoints assemble in **~0.27 s**;
   - **Three high-fidelity precision tiers**: FP32 native (1.32 GB) · full FP16 (631 MB) · **FP16 Balanced** (730 MB, keeps FP32 on sensitive layers — worst-case error ~1/5 of full FP16, i.e. **≈5× higher precision for a 45% size cut; recommended**);

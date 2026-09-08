@@ -507,7 +507,7 @@ def build_md(s, b, env, datasets, tests) -> str:
         best_label, best_ratio = max(ratios, key=lambda t: t[1])
         A("**规律**：加速比随**问题规模增大而上升**——单变量小样本（S1，1×512）与"
           "长视野（S3，h=720）上 Rust 与官方互有胜负（Rayon 调度开销 / 自回归解码步数占主导）；"
-          f"到了宽表（{best_label}）场景，自研 cache-tiled GEMM + 分块并行优势最大，"
+          f"到了宽表（{best_label}）场景，cache-tiled GEMM + 分块并行优势最大，"
           f"达到 **{best_ratio:.2f}×**。"
           f"这与 §4.1 全矩阵 {tot_off / tot_r32:.2f}× 的整体结论一致：全矩阵 "
           f"{len(sp)} 个场景里有 **{nfast} 个** Rust 更快。")

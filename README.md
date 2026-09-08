@@ -3,15 +3,15 @@
 **简体中文** · [English](README.en.md)
 
 <p align="center">
-<img alt="Pure Rust" src="https://img.shields.io/badge/Rust-专有引擎-orange">
+<img alt="Pure Rust" src="https://img.shields.io/badge/Rust-纯Rust引擎-orange">
 <img alt="License" src="https://img.shields.io/badge/License-Apache--2.0-blue">
 <img alt="Runtime deps" src="https://img.shields.io/badge/运行期依赖-零-green">
 <img alt="Binary" src="https://img.shields.io/badge/Release_Binary-~1.1MB-purple">
 </p>
 
-专为 Google **TimesFM 3.0** 时间序列大基座模型打造的高性能**专有纯 Rust 推理引擎**。
+专为 Google **TimesFM 3.0** 时间序列大基座模型打造的高性能**纯 Rust 推理引擎**。
 
-全部时序注意力与数学算子均为自研,**无 `tch-rs` / `candle` / Python 运行时依赖**;热路径基于 Rayon 多线程与手写 SIMD 微内核(x86_64 AVX2+FMA+F16C、aarch64 NEON),Release 静态二进制仅约 **1.1 MB**,冷启动即时就绪。
+**无 `tch-rs` / `candle` / Python 运行时依赖**;热路径基于 Rayon 多线程与 SIMD 微内核(x86_64 AVX2+FMA+F16C、aarch64 NEON),Release 静态二进制仅约 **1.1 MB**,冷启动即时就绪。
 
 ---
 
@@ -33,7 +33,7 @@
   2. **极致轻量** — 纯推理导向,去除反向传播与梯度存储,热路径内存预分配;Release 静态链接体积约 **1.1 MB**。
   3. **严格对齐官方精度** — 浮点精度对齐至 $10^{-5}$ 级别(见下文精度基准)。
 - **核心特性**:
-  - **自研算子,无黑盒**:CPU Tiled Online Softmax(FlashAttention 思想,因果区算力减半)、N 轴列切分 GEMM、RMSNorm / PerDimScale / RoPE 静态预计算表全部手写;
+  - **独立算子实现**:CPU Tiled Online Softmax(FlashAttention 思想,因果区算力减半)、N 轴列切分 GEMM、RMSNorm / PerDimScale / RoPE 静态预计算表;
   - **原生 SIMD + 多线程**:x86_64 AVX2/F16C 与 aarch64 NEON 双内核,Rayon 并行任务化(batch×head 展平,单序列也能跑满多核);
   - **零拷贝加载**:基于 `memmap2` 的 safetensors 内存映射解析 + 内置约 150 行递归下降 JSON 解析器;FP16 权重在 half 域直接完成转置布局,半精度检查点**秒级装配**;
   - **高保真量化三档**:FP32 原生(1.32 GB)· FP16 全量(631 MB)· FP16 混合 Balanced(730 MB,敏感层保留 FP32,worst-case 误差约为全量 FP16 的 1/5,**体积缩减 45% 同时精度提升约 5 倍,推荐首选**);
