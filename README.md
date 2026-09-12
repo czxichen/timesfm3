@@ -58,6 +58,20 @@ cargo run --release --bin forecast -- <ckpt_dir> <horizon> [context.csv]
 # 例:cargo run --release --bin forecast -- ckpt_balanced 96 data/etth1.csv
 ```
 
+### 桌面端可视化图形界面 (Tauri GUI)
+
+本项目提供了专为小白用户设计的轻量可视化桌面端应用（基于 Tauri 2.0 + React）：
+
+```bash
+cd ui
+npm install
+npm run tauri dev
+```
+
+* **极简 4 步向导**：数据导入 ➔ 智能时间列识别与业务循环建议 ➔ 预测条数/模型设置 ➔ 交互式扇形图看板与导出。
+* **免格式转换**：支持标准业务表格 CSV（含表头、时间戳列）直接拖拽，自动在内存中转置与切片。
+* **一键示例体验**：内置电力变压器等经典数据集，开箱即用。
+
 ---
 
 ## 精度:与官方 PyTorch 对齐
