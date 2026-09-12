@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::time::Instant;
 
 use serde::{Deserialize, Serialize};
@@ -20,7 +20,6 @@ pub struct CheckpointMeta {
 
 #[tauri::command]
 pub fn list_checkpoints() -> Result<Vec<CheckpointMeta>, String> {
-    // Relative paths from project root or executable dir
     let candidates = [
         ("均衡模式 (Balanced · 推荐)", "publish/timesfm3.0-balanced", "均衡高精", "约 730 MB · 推荐首选，在精度与运行速度间达到最佳平衡", true),
         ("极速轻量模式", "publish/timesfm3.0-f16", "极速轻量", "约 631 MB · 内存占用低，适合轻量设备或快速批量推断", false),
@@ -43,7 +42,169 @@ pub fn list_checkpoints() -> Result<Vec<CheckpointMeta>, String> {
         });
     }
 
+    // Also check standard user cache directory: ~/.cache/timesfm3
+    if let Ok(home) = std::env::var("HOME").or_else(|_| std::env::var("USERPROFILE")) {
+        let home_cache = PathBuf::from(home).join(".cache").join("timesfm3");
+        if home_cache.join("model.safetensors").exists() {
+            let meta = std::fs::metadata(home_cache.join("model.safetensors")).ok();
+            let size_str = meta.map(|m| format!("{:.1} MB", m.len() as f64 / 1048576.0)).unwrap_or_else(|| "本地缓存".into());
+            results.push(CheckpointMeta {
+                name: "系统缓存模型 (~/.cache/timesfm3)".into(),
+                path: home_cache.to_string_lossy().to_string(),
+                precision: "自动识别".into(),
+                size_desc: format!("{size_str} · 系统缓存目录"),
+                is_recommended: false,
+                exists: true,
+            });
+        }
+    }
+
     Ok(results)
+}
+
+#[tauri::command]
+pub fn inspect_model_path(raw_path: String) -> Result<CheckpointMeta, String> {
+    let raw = raw_path.trim();
+    if raw.is_empty() {
+        return Err("模型路径不能为空".to_string());
+    }
+
+    let p = PathBuf::from(raw);
+    let dir = if p.is_file() {
+        p.parent().unwrap_or(&p).to_path_buf()
+    } else {
+        p
+    };
+
+    let st_path = dir.join("model.safetensors");
+    if !st_path.exists() {
+        return Err(format!(
+            "在指定路径 [{}] 下未找到 model.safetensors 权重文件，请确认所选目录完整",
+            dir.display()
+        ));
+    }
+
+    let meta = std::fs::metadata(&st_path)
+        .map_err(|e| format!("读取模型文件元数据失败: {e}"))?;
+    let size_bytes = meta.len();
+    let size_mb = size_bytes as f64 / (1024.0 * 1024.0);
+    let size_str = if size_mb >= 1024.0 {
+        format!("{:.2} GB", size_mb / 1024.0)
+    } else {
+        format!("{:.1} MB", size_mb)
+    };
+
+    let cfg_path = dir.join("config.json");
+    let mut precision_name = "自动推断精度".to_string();
+    let mut desc = format!("权重大小: {size_str}");
+
+    if cfg_path.exists() {
+        if let Ok(cfg_bytes) = std::fs::read(&cfg_path) {
+            if let Ok(json_str) = String::from_utf8(cfg_bytes) {
+                let lower = json_str.to_lowercase();
+                if lower.contains("balanced") {
+                    precision_name = "均衡高精 (Balanced)".into();
+                    desc = format!("{size_str} · 推荐模式");
+                } else if lower.contains("f16") || lower.contains("fp16") {
+                    precision_name = "FP16 半精度".into();
+                    desc = format!("{size_str} · 极速轻量");
+                } else if lower.contains("f32") || lower.contains("fp32") {
+                    precision_name = "FP32 全精度".into();
+                    desc = format!("{size_str} · 高保真原版");
+                }
+            }
+        }
+    } else {
+        if size_mb < 700.0 {
+            precision_name = "FP16 轻量版".into();
+        } else if size_mb < 900.0 {
+            precision_name = "Balanced 均衡版".into();
+        } else {
+            precision_name = "FP32 原版完整权重".into();
+        }
+    }
+
+    let folder_name = dir.file_name()
+        .map(|s| s.to_string_lossy().to_string())
+        .unwrap_or_else(|| "自定义模型".to_string());
+
+    Ok(CheckpointMeta {
+        name: format!("自定义模型 ({folder_name})"),
+        path: dir.to_string_lossy().to_string(),
+        precision: precision_name,
+        size_desc: desc,
+        is_recommended: true,
+        exists: true,
+    })
+}
+
+#[tauri::command]
+pub async fn pick_model_directory() -> Result<Option<String>, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        #[cfg(target_os = "macos")]
+        {
+            let script = r#"
+                try
+                    set chosenItem to choose folder with prompt "请选择包含 model.safetensors 的 TimesFM 3.0 模型目录"
+                    return POSIX path of chosenItem
+                on error
+                    try
+                        set chosenFile to choose file with prompt "或直接选择 model.safetensors 权重文件" of type {"safetensors", "bin"}
+                        return POSIX path of chosenFile
+                    on error
+                        return ""
+                    end try
+                end try
+            "#;
+            let output = std::process::Command::new("osascript")
+                .arg("-e")
+                .arg(script)
+                .output()
+                .map_err(|e| format!("调用系统目录选择器失败: {e}"))?;
+
+            if output.status.success() {
+                let path_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                if !path_str.is_empty() {
+                    let p = Path::new(&path_str);
+                    if p.is_file() {
+                        if let Some(parent) = p.parent() {
+                            return Ok(Some(parent.to_string_lossy().to_string()));
+                        }
+                    }
+                    return Ok(Some(path_str));
+                }
+            }
+            Ok(None)
+        }
+        #[cfg(target_os = "windows")]
+        {
+            let script = r#"
+                Add-Type -AssemblyName System.Windows.Forms
+                $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
+                $dialog.Description = "请选择 TimesFM 3.0 模型权重目录 (包含 model.safetensors)"
+                if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
+                    Write-Output $dialog.SelectedPath
+                }
+            "#;
+            let output = std::process::Command::new("powershell")
+                .args(["-NoProfile", "-Command", script])
+                .output()
+                .map_err(|e| format!("调用 Windows 目录选择器失败: {e}"))?;
+            if output.status.success() {
+                let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                if !path.is_empty() {
+                    return Ok(Some(path));
+                }
+            }
+            Ok(None)
+        }
+        #[cfg(not(any(target_os = "macos", target_os = "windows")))]
+        {
+            Ok(None)
+        }
+    })
+    .await
+    .map_err(|e| format!("选择模型目录任务异常: {e}"))?
 }
 
 #[tauri::command]
@@ -385,12 +546,31 @@ fn find_project_root() -> PathBuf {
             }
         }
     }
-    PathBuf::from("/Users/xichen/data/code/aicode/timesfm3")
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(parent) = exe.parent() {
+            if parent.join("ckpt").exists() || parent.join("publish").exists() {
+                return parent.to_path_buf();
+            }
+        }
+    }
+    std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_inspect_model_path() {
+        let root = find_project_root();
+        let valid_path = root.join("publish/timesfm3.0-balanced");
+        if valid_path.exists() {
+            let meta = inspect_model_path(valid_path.to_string_lossy().to_string()).expect("inspect failed");
+            assert!(meta.exists);
+            assert!(meta.size_desc.contains("MB") || meta.size_desc.contains("GB"));
+        }
+        assert!(inspect_model_path("non_existent_dir_12345".into()).is_err());
+    }
 
     #[test]
     fn test_list_checkpoints() {

@@ -12,6 +12,8 @@ pub fn run() {
         .manage(AppState::default())
         .invoke_handler(tauri::generate_handler![
             commands::list_checkpoints,
+            commands::inspect_model_path,
+            commands::pick_model_directory,
             commands::inspect_csv,
             commands::pick_csv_file,
             commands::upload_csv_content,

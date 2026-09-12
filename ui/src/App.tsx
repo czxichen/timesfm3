@@ -21,6 +21,9 @@ import {
   ShieldCheck,
   Activity,
   Check,
+  FolderOpen,
+  HelpCircle,
+  AlertTriangle,
 } from 'lucide-react';
 import type {
   CsvInspectionResult,
@@ -36,6 +39,8 @@ import {
   pickCsvFile,
   uploadCsvContent,
   isTauri,
+  pickModelDirectory,
+  inspectModelPath,
 } from './api';
 import { FanChart } from './components/FanChart';
 
@@ -52,7 +57,13 @@ export function App() {
   // Forecast settings
   const [horizon, setHorizon] = useState<number>(48);
   const [checkpoints, setCheckpoints] = useState<CheckpointMeta[]>([]);
-  const [selectedCkptPath, setSelectedCkptPath] = useState<string>('');
+  const [selectedCkptPath, setSelectedCkptPath] = useState<string>(() => {
+    return localStorage.getItem('timesfm3_model_path') || '';
+  });
+  const [customModelPathInput, setCustomModelPathInput] = useState<string>('');
+  const [modelError, setModelError] = useState<string | null>(null);
+  const [isVerifyingModel, setIsVerifyingModel] = useState<boolean>(false);
+  const [showModelDownloadGuide, setShowModelDownloadGuide] = useState<boolean>(false);
   const [makePositive, setMakePositive] = useState<boolean>(false);
   const [useSymmetric, setUseSymmetric] = useState<boolean>(true);
   const [useSmoothing, setUseSmoothing] = useState<boolean>(true);
@@ -221,21 +232,93 @@ export function App() {
     };
   };
 
-  // Load available checkpoints on mount
+  // Load available checkpoints on mount, restoring custom saved path if any
   useEffect(() => {
-    listCheckpoints()
-      .then((ckpts) => {
-        setCheckpoints(ckpts);
-        const rec =
-          ckpts.find((c) => c.is_recommended && c.exists) ||
-          ckpts.find((c) => c.exists) ||
-          ckpts[0];
-        if (rec) {
-          setSelectedCkptPath(rec.path);
-        }
-      })
-      .catch((e) => console.error('获取模型列表失败:', e));
+    const initCheckpoints = async () => {
+      try {
+        const ckpts = await listCheckpoints();
+        const savedPath = localStorage.getItem('timesfm3_model_path');
+        let mergedList = [...ckpts];
 
+        if (savedPath) {
+          try {
+            const inspected = await inspectModelPath(savedPath);
+            const existingIdx = mergedList.findIndex((c) => c.path === inspected.path);
+            if (existingIdx >= 0) {
+              mergedList[existingIdx] = inspected;
+            } else {
+              mergedList.unshift(inspected);
+            }
+            setSelectedCkptPath(inspected.path);
+          } catch {
+            // If saved path is no longer valid, keep default list
+          }
+        }
+
+        setCheckpoints(mergedList);
+
+        const currentChosen = mergedList.find((c) => c.path === selectedCkptPath && c.exists);
+        if (!currentChosen) {
+          const firstValid = mergedList.find((c) => c.is_recommended && c.exists) || mergedList.find((c) => c.exists);
+          if (firstValid) {
+            setSelectedCkptPath(firstValid.path);
+            localStorage.setItem('timesfm3_model_path', firstValid.path);
+          }
+        }
+      } catch (e) {
+        console.error('获取模型列表失败:', e);
+      }
+    };
+
+    initCheckpoints();
+  }, []);
+
+  const handlePickModelDirectory = async () => {
+    setModelError(null);
+    setIsVerifyingModel(true);
+    try {
+      const picked = await pickModelDirectory();
+      if (!picked) {
+        setIsVerifyingModel(false);
+        return;
+      }
+      const meta = await inspectModelPath(picked);
+      localStorage.setItem('timesfm3_model_path', meta.path);
+      setCheckpoints((prev) => {
+        const next = prev.filter((c) => c.path !== meta.path);
+        return [meta, ...next];
+      });
+      setSelectedCkptPath(meta.path);
+      setCustomModelPathInput('');
+    } catch (err: any) {
+      setModelError(typeof err === 'string' ? err : err.message || '模型目录验证失败');
+    } finally {
+      setIsVerifyingModel(false);
+    }
+  };
+
+  const handleApplyCustomPathInput = async () => {
+    const raw = customModelPathInput.trim();
+    if (!raw) return;
+    setModelError(null);
+    setIsVerifyingModel(true);
+    try {
+      const meta = await inspectModelPath(raw);
+      localStorage.setItem('timesfm3_model_path', meta.path);
+      setCheckpoints((prev) => {
+        const next = prev.filter((c) => c.path !== meta.path);
+        return [meta, ...next];
+      });
+      setSelectedCkptPath(meta.path);
+      setCustomModelPathInput('');
+    } catch (err: any) {
+      setModelError(typeof err === 'string' ? err : err.message || '该路径下未找到有效的 model.safetensors 权重');
+    } finally {
+      setIsVerifyingModel(false);
+    }
+  };
+
+  useEffect(() => {
     // Support URL query param for direct preview: ?step=2 or ?step=3 or ?step=4
     const params = new URLSearchParams(window.location.search);
     const stepParam = parseInt(params.get('step') || '0', 10);
@@ -485,18 +568,14 @@ export function App() {
       return;
     }
 
-    // Auto-select valid checkpoint if currently empty
-    let ckptPath = selectedCkptPath;
-    if (!ckptPath) {
-      const valid = checkpoints.find((c) => c.exists) || checkpoints[0];
-      if (valid) {
-        ckptPath = valid.path;
-        setSelectedCkptPath(valid.path);
-      } else {
-        setErrorMsg('未找到可用的模型权重，请检查本地权重文件目录');
-        return;
-      }
+    const activeCkpt = checkpoints.find((c) => c.path === selectedCkptPath);
+    const hasValidModel = Boolean(activeCkpt && activeCkpt.exists);
+
+    if (!hasValidModel) {
+      setErrorMsg('尚未指定或配置有效的 TimesFM 3.0 模型权重，请先在下方点击【选择本地模型目录】');
+      return;
     }
+    const ckptPath = activeCkpt!.path;
 
     setIsLoading(true);
     setIsForecasting(true);
@@ -589,10 +668,29 @@ export function App() {
               <ShieldCheck className="w-3.5 h-3.5 text-slate-500" />
               <span>本地离线运行 · 数据安全</span>
             </span>
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span className="text-[11px] font-medium">模型就绪</span>
-            </div>
+            {(() => {
+              const activeCkpt = checkpoints.find((c) => c.path === selectedCkptPath);
+              const hasValidModel = Boolean(activeCkpt && activeCkpt.exists);
+              return hasValidModel ? (
+                <div
+                  className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-medium cursor-pointer hover:bg-emerald-100 transition-colors"
+                  onClick={() => setCurrentStep(3)}
+                  title={`当前已加载: ${activeCkpt?.path}`}
+                >
+                  <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span className="text-[11px] font-medium">模型已就绪</span>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setCurrentStep(3)}
+                  className="flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-medium cursor-pointer transition-colors"
+                >
+                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                  <span className="text-[11px] font-medium">未配置模型 (点击配置)</span>
+                </button>
+              );
+            })()}
           </div>
         </div>
       </header>
@@ -1153,60 +1251,226 @@ export function App() {
             })()}
 
             {/* Checkpoints Card */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-3.5 border-b border-slate-100">
-                <div className="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center">
-                  <Database className="w-4 h-4" />
-                </div>
-                <h3 className="font-bold text-slate-900 text-xs">2. 预测模式与精度档位</h3>
-              </div>
+            {(() => {
+              const activeCkpt = checkpoints.find((c) => c.path === selectedCkptPath);
+              const hasValidModel = Boolean(activeCkpt && activeCkpt.exists);
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-                {checkpoints.map((ckpt) => {
-                  const isSelected = selectedCkptPath === ckpt.path;
-                  return (
-                    <div
-                      key={ckpt.path}
-                      onClick={() => {
-                        if (ckpt.exists) {
-                          setSelectedCkptPath(ckpt.path);
-                        }
-                      }}
-                      className={`p-4 rounded-2xl border text-xs flex flex-col justify-between transition-all cursor-pointer ${
-                        isSelected
-                          ? 'border-indigo-600 bg-indigo-50/50 ring-2 ring-indigo-400/30 shadow-xs'
-                          : ckpt.exists
-                          ? 'border-slate-200 hover:border-indigo-300 hover:bg-slate-50/50 bg-white'
-                          : 'border-slate-100 bg-slate-50/50 opacity-40 cursor-not-allowed'
-                      }`}
-                    >
-                      <div className="space-y-2">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="font-bold text-slate-950 flex flex-col gap-1">
-                            <span>{ckpt.name}</span>
-                            {ckpt.is_recommended && (
-                              <span className="w-fit text-[10px] bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold px-2 py-0.2 rounded-full">
-                                推荐首选
-                              </span>
-                            )}
-                          </div>
-                          {ckpt.exists ? (
-                            <span className="text-[10px] text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 shrink-0">
-                              已就绪
-                            </span>
-                          ) : (
-                            <span className="text-[10px] text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full shrink-0">
-                              未就绪
-                            </span>
-                          )}
+              return (
+                <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 border-b border-slate-100">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center">
+                        <Database className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-slate-900 text-xs">2. TimesFM 3.0 模型权重管理</h3>
+                        <div className="text-[11px] text-slate-400 mt-0.5">
+                          客户端不随安装包内置 1GB+ 权重，请指定电脑本地包含 model.safetensors 的模型目录
                         </div>
-                        <div className="text-[11px] text-slate-500 leading-relaxed">{ckpt.size_desc}</div>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={handlePickModelDirectory}
+                        disabled={isVerifyingModel}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-2xs transition-all cursor-pointer disabled:opacity-50"
+                      >
+                        <FolderOpen className="w-3.5 h-3.5" />
+                        <span>{isVerifyingModel ? '正在校验...' : '选择本地模型目录'}</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowModelDownloadGuide(!showModelDownloadGuide)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
+                      >
+                        <HelpCircle className="w-3.5 h-3.5 text-slate-500" />
+                        <span>获取模型指引</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Error Message if inspection fails */}
+                  {modelError && (
+                    <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-800 flex items-start gap-2.5">
+                      <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                      <div className="leading-relaxed flex-1">
+                        <strong>模型加载失败：</strong> {modelError}
+                      </div>
+                      <button
+                        onClick={() => setModelError(null)}
+                        className="text-rose-500 hover:text-rose-700 text-xs font-bold"
+                      >
+                        关闭
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Active Selected Model Display */}
+                  {hasValidModel ? (
+                    <div className="bg-emerald-50/50 border border-emerald-200/80 rounded-2xl p-4 space-y-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="font-bold text-slate-900 text-xs">{activeCkpt?.name}</span>
+                          <span className="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full border border-emerald-300">
+                            {activeCkpt?.precision}
+                          </span>
+                        </div>
+                        <span className="text-xs font-mono font-medium text-emerald-800">
+                          {activeCkpt?.size_desc}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-3 bg-white/80 border border-emerald-200/60 rounded-xl px-3 py-2 text-xs">
+                        <div className="flex items-center gap-2 min-w-0 flex-1 font-mono text-slate-600 text-[11px]">
+                          <span className="text-slate-400 shrink-0">文件路径:</span>
+                          <span className="truncate select-all text-slate-800" title={activeCkpt?.path}>
+                            {activeCkpt?.path}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handlePickModelDirectory}
+                          className="shrink-0 text-xs font-semibold text-indigo-700 hover:text-indigo-900 underline cursor-pointer"
+                        >
+                          更换路径
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-5 space-y-4">
+                      <div className="flex items-start gap-3">
+                        <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                        <div className="space-y-1">
+                          <h4 className="font-bold text-amber-950 text-xs">尚未配置本地 TimesFM 3.0 模型权重</h4>
+                          <p className="text-xs text-amber-800/90 leading-relaxed">
+                            本软件发布包体积精简，未随安装包内置 1GB+ 的模型大文件。首次使用请指定您本地的模型存放目录（须包含 <code className="bg-amber-100 px-1 py-0.5 rounded font-mono text-amber-900">model.safetensors</code>）。
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-3 pt-1">
+                        <button
+                          type="button"
+                          onClick={handlePickModelDirectory}
+                          disabled={isVerifyingModel}
+                          className="px-4 py-2.5 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                        >
+                          <FolderOpen className="w-4 h-4" />
+                          <span>{isVerifyingModel ? '正在读取校验...' : '点击浏览并选择模型目录'}</span>
+                        </button>
+
+                        <div className="flex items-center gap-2 flex-1 min-w-[260px]">
+                          <input
+                            type="text"
+                            placeholder="或直接粘贴模型文件夹绝对路径..."
+                            value={customModelPathInput}
+                            onChange={(e) => setCustomModelPathInput(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleApplyCustomPathInput()}
+                            className="flex-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
+                          />
+                          <button
+                            type="button"
+                            onClick={handleApplyCustomPathInput}
+                            disabled={!customModelPathInput.trim() || isVerifyingModel}
+                            className="px-3.5 py-2 text-xs font-semibold bg-slate-800 hover:bg-slate-900 text-white rounded-xl transition-all cursor-pointer disabled:opacity-40 shrink-0"
+                          >
+                            加载
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Collapsible Download & Installation Guide */}
+                  {showModelDownloadGuide && (
+                    <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 text-xs text-slate-700 animate-in fade-in duration-150">
+                      <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                        <span className="font-bold text-slate-900 flex items-center gap-1.5">
+                          <Download className="w-4 h-4 text-indigo-600" />
+                          <span>如何获取 TimesFM 3.0 模型权重文件？</span>
+                        </span>
+                        <button
+                          onClick={() => setShowModelDownloadGuide(false)}
+                          className="text-slate-400 hover:text-slate-600 text-xs"
+                        >
+                          收起指引
+                        </button>
+                      </div>
+
+                      <p className="leading-relaxed text-slate-600">
+                        模型文件包含两个核心文件：<strong className="text-slate-900 font-mono">model.safetensors</strong>（权重，约730MB）和 <strong className="text-slate-900 font-mono">config.json</strong>（配置文件）。您可以从以下任意渠道下载并保存在电脑任意位置：
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                        <div className="bg-white p-3.5 rounded-xl border border-slate-200 space-y-1.5">
+                          <div className="font-bold text-slate-900 flex items-center justify-between">
+                            <span>🚀 国内高速：魔搭社区 (ModelScope)</span>
+                            <span className="text-[10px] bg-red-50 text-red-600 border border-red-200 px-1.5 py-0.2 rounded font-semibold">推荐</span>
+                          </div>
+                          <div className="text-[11px] text-slate-500 leading-relaxed">
+                            无需代理直接满速下载，可在终端执行：
+                          </div>
+                          <code className="block bg-slate-900 text-emerald-400 p-2 rounded-lg font-mono text-[11px] select-all overflow-x-auto">
+                            modelscope download --model czxichen/timesfm3.0-balanced --local_dir ./models/timesfm3
+                          </code>
+                        </div>
+
+                        <div className="bg-white p-3.5 rounded-xl border border-slate-200 space-y-1.5">
+                          <div className="font-bold text-slate-900 flex items-center justify-between">
+                            <span>🌐 官方开源：Hugging Face</span>
+                            <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-semibold">官方</span>
+                          </div>
+                          <div className="text-[11px] text-slate-500 leading-relaxed">
+                            国际开发者首选，支持直接网页下载或使用 CLI：
+                          </div>
+                          <code className="block bg-slate-900 text-emerald-400 p-2 rounded-lg font-mono text-[11px] select-all overflow-x-auto">
+                            huggingface-cli download czxichen/timesfm3.0-balanced --local-dir ./models/timesfm3
+                          </code>
+                        </div>
+                      </div>
+
+                      <div className="text-[11px] text-slate-500 pt-1">
+                        💡 下载完成后，点击上方的 <strong>「选择本地模型目录」</strong> 按钮选择该文件夹，系统将自动识别并永久记住该路径。
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Candidate Models Switcher (if multiple available) */}
+                  {checkpoints.filter((c) => c.exists).length > 1 && (
+                    <div className="pt-2 border-t border-slate-100 space-y-2">
+                      <div className="text-[11px] font-semibold text-slate-500">已检测到的其他本地模型：</div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                        {checkpoints
+                          .filter((c) => c.exists)
+                          .map((ckpt) => {
+                            const isCurrent = selectedCkptPath === ckpt.path;
+                            return (
+                              <div
+                                key={ckpt.path}
+                                onClick={() => {
+                                  setSelectedCkptPath(ckpt.path);
+                                  localStorage.setItem('timesfm3_model_path', ckpt.path);
+                                }}
+                                className={`p-3 rounded-xl border text-xs cursor-pointer transition-all flex flex-col justify-between ${
+                                  isCurrent
+                                    ? 'border-indigo-600 bg-indigo-50/60 ring-1 ring-indigo-500/20 font-semibold'
+                                    : 'border-slate-200 hover:border-indigo-300 hover:bg-slate-50/50 bg-white'
+                                }`}
+                              >
+                                <div className="font-bold text-slate-900 truncate">{ckpt.name}</div>
+                                <div className="text-[10px] text-slate-500 mt-1 truncate">{ckpt.size_desc}</div>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
 
             {/* Advanced Switches Card */}
             <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs space-y-4">
@@ -1274,38 +1538,50 @@ export function App() {
             )}
 
             {/* Bottom Actions */}
-            <div className="flex items-center justify-between pt-2">
-              <button
-                onClick={() => setCurrentStep(2)}
-                disabled={isLoading}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 px-4.5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>返回修改设置</span>
-              </button>
+            {(() => {
+              const activeCkpt = checkpoints.find((c) => c.path === selectedCkptPath);
+              const hasValidModel = Boolean(activeCkpt && activeCkpt.exists);
 
-              <button
-                onClick={handleRunForecast}
-                disabled={isLoading}
-                className={`inline-flex items-center gap-2 text-xs font-bold px-8 py-3 rounded-xl transition-all ${
-                  isLoading
-                    ? 'bg-slate-200 hover:bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed shadow-none select-none'
-                    : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm hover:shadow-md active:scale-[0.98] cursor-pointer'
-                }`}
-              >
-                {isLoading ? (
-                  <>
-                    <RefreshCw className="w-4 h-4 animate-spin text-slate-400" />
-                    <span>模型推断计算中 ({forecastElapsedSec.toFixed(1)}s)...</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-4 h-4 fill-white text-white" />
-                    <span>开始预测分析</span>
-                  </>
-                )}
-              </button>
-            </div>
+              return (
+                <div className="flex items-center justify-between pt-2">
+                  <button
+                    onClick={() => setCurrentStep(2)}
+                    disabled={isLoading}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-950 px-4.5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span>返回修改设置</span>
+                  </button>
+
+                  <button
+                    onClick={handleRunForecast}
+                    disabled={isLoading || !hasValidModel}
+                    className={`inline-flex items-center gap-2 text-xs font-bold px-8 py-3 rounded-xl transition-all ${
+                      isLoading || !hasValidModel
+                        ? 'bg-slate-200 hover:bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed shadow-none select-none'
+                        : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm hover:shadow-md active:scale-[0.98] cursor-pointer'
+                    }`}
+                  >
+                    {isLoading ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin text-slate-400" />
+                        <span>模型推断计算中 ({forecastElapsedSec.toFixed(1)}s)...</span>
+                      </>
+                    ) : !hasValidModel ? (
+                      <>
+                        <AlertTriangle className="w-4 h-4 text-slate-400" />
+                        <span>请先在上方指定模型目录</span>
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-4 h-4 fill-white text-white" />
+                        <span>开始预测分析</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              );
+            })()}
           </div>
         )}
 

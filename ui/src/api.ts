@@ -42,6 +42,27 @@ export async function listCheckpoints(): Promise<CheckpointMeta[]> {
   ];
 }
 
+export async function pickModelDirectory(): Promise<string | null> {
+  if (isTauri()) {
+    return tauriInvoke<string | null>('pick_model_directory');
+  }
+  return null;
+}
+
+export async function inspectModelPath(rawPath: string): Promise<CheckpointMeta> {
+  if (isTauri()) {
+    return tauriInvoke<CheckpointMeta>('inspect_model_path', { rawPath });
+  }
+  return {
+    name: '自定义本地模型',
+    path: rawPath,
+    precision: '均衡高精 (Balanced)',
+    size_desc: '约 730 MB · 本地指定目录',
+    is_recommended: true,
+    exists: true,
+  };
+}
+
 export async function inspectCsv(filePath: string): Promise<CsvInspectionResult> {
   if (isTauri()) {
     return tauriInvoke<CsvInspectionResult>('inspect_csv', { filePath });

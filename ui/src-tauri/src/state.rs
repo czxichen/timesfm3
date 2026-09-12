@@ -13,6 +13,13 @@ pub struct LoadedModel {
 
 fn resolve_ckpt_dir<P: AsRef<Path>>(dir: P) -> PathBuf {
     let p = dir.as_ref();
+    if p.is_file() {
+        if let Some(parent) = p.parent() {
+            if parent.join("model.safetensors").exists() {
+                return parent.to_path_buf();
+            }
+        }
+    }
     if p.join("model.safetensors").exists() {
         return p.to_path_buf();
     }
@@ -34,9 +41,13 @@ fn resolve_ckpt_dir<P: AsRef<Path>>(dir: P) -> PathBuf {
             }
         }
     }
-    let fallback = PathBuf::from("/Users/xichen/data/code/aicode/timesfm3").join(p);
-    if fallback.join("model.safetensors").exists() {
-        return fallback;
+    if let Ok(exe_path) = std::env::current_exe() {
+        if let Some(exe_dir) = exe_path.parent() {
+            let in_exe = exe_dir.join(p);
+            if in_exe.join("model.safetensors").exists() {
+                return in_exe;
+            }
+        }
     }
     p.to_path_buf()
 }
