@@ -24,6 +24,9 @@ import {
   FolderOpen,
   HelpCircle,
   AlertTriangle,
+  ClipboardPaste,
+  FileText,
+  FileCode,
 } from 'lucide-react';
 import type {
   CsvInspectionResult,
@@ -38,10 +41,19 @@ import {
   exportForecastCsv,
   pickCsvFile,
   uploadCsvContent,
+  readFileBinary,
+  readFileText,
   isTauri,
   pickModelDirectory,
   inspectModelPath,
 } from './api';
+import {
+  parseExcelBuffer,
+  parsePastedText,
+  PASTE_DEMO_PRESETS,
+  type ParseResult,
+  type ExcelWorkbookInfo,
+} from './utils/dataImport';
 import { FanChart } from './components/FanChart';
 
 export function App() {
@@ -53,6 +65,14 @@ export function App() {
   const [selectedDateCol, setSelectedDateCol] = useState<string | null>(null);
   const [selectedTargets, setSelectedTargets] = useState<string[]>([]);
   const [seasonalPeriod, setSeasonalPeriod] = useState<number | null>(null);
+
+  // Multi-format ingestion & smart paste states
+  const [inputMode, setInputMode] = useState<'file' | 'paste'>('file');
+  const [pastedText, setPastedText] = useState<string>('');
+  const [pasteResult, setPasteResult] = useState<ParseResult | null>(null);
+  const [excelWorkbook, setExcelWorkbook] = useState<ExcelWorkbookInfo | null>(null);
+  const [excelBuffer, setExcelBuffer] = useState<ArrayBuffer | Uint8Array | null>(null);
+  const [excelFileName, setExcelFileName] = useState<string>('');
 
   // Forecast settings
   const [horizon, setHorizon] = useState<number>(48);
@@ -397,6 +417,54 @@ export function App() {
     return () => clearInterval(timer);
   }, [isInspecting]);
 
+  // Process a local filesystem path (from Tauri native drag-drop or native file picker)
+  const processLocalFilePath = async (filePath: string) => {
+    const fileName = filePath.split('/').pop() || filePath.split('\\').pop() || '时序数据.csv';
+    const ext = fileName.split('.').pop()?.toLowerCase() || '';
+
+    setInspectingFileName(fileName);
+    setIsInspecting(true);
+    setIsLoading(true);
+    setErrorMsg(null);
+
+    try {
+      if (['xlsx', 'xls', 'ods', 'xlsb'].includes(ext)) {
+        setInspectingPhase('正在读取 Excel 工作簿并提取时序工作表...');
+        const bytes = await readFileBinary(filePath);
+        const info = parseExcelBuffer(bytes);
+        setExcelBuffer(bytes);
+        setExcelWorkbook(info);
+        setExcelFileName(fileName);
+        const cleanCsvName = fileName.replace(/\.[^/.]+$/, '') + '.csv';
+        const res = await uploadCsvContent(cleanCsvName, info.csvContent);
+        applyInspection(res);
+        setCurrentStep(2);
+      } else if (ext === 'json') {
+        setInspectingPhase('正在读取并转换 JSON 数据结构...');
+        const text = await readFileText(filePath);
+        const parsed = parsePastedText(text);
+        if (!parsed.success) {
+          throw new Error(parsed.error || 'JSON 数据结构解析失败');
+        }
+        const cleanCsvName = fileName.replace(/\.json$/i, '') + '.csv';
+        const res = await uploadCsvContent(cleanCsvName, parsed.csvContent);
+        applyInspection(res);
+        setCurrentStep(2);
+      } else {
+        // CSV, TSV, TXT (Rust csv_helper handles auto-delimiter)
+        setInspectingPhase('正在扫描表格字段、识别时间列与采样周期...');
+        const res = await inspectCsv(filePath);
+        applyInspection(res);
+        setCurrentStep(2);
+      }
+    } catch (err: any) {
+      setErrorMsg(`解析文件失败: ${err.toString()}`);
+    } finally {
+      setIsLoading(false);
+      setIsInspecting(false);
+    }
+  };
+
   // Listen to native Tauri window drag-and-drop
   useEffect(() => {
     let unlisten: (() => void) | undefined;
@@ -406,22 +474,7 @@ export function App() {
           return getCurrentWebview().onDragDropEvent(async (event) => {
             if (event.payload.type === 'drop' && event.payload.paths && event.payload.paths.length > 0) {
               const droppedPath = event.payload.paths[0];
-              const name = droppedPath.split('/').pop() || droppedPath.split('\\').pop() || '时序数据.csv';
-              setInspectingFileName(name);
-              setInspectingPhase('正在读取并扫描时序表格数据...');
-              setIsInspecting(true);
-              setIsLoading(true);
-              setErrorMsg(null);
-              try {
-                const res = await inspectCsv(droppedPath);
-                applyInspection(res);
-                setCurrentStep(2);
-              } catch (err: any) {
-                setErrorMsg(`读取 CSV 失败: ${err.toString()}`);
-              } finally {
-                setIsLoading(false);
-                setIsInspecting(false);
-              }
+              await processLocalFilePath(droppedPath);
             }
           });
         })
@@ -442,34 +495,119 @@ export function App() {
 
   // Process uploaded or dropped File object
   const processUploadedFile = async (file: File) => {
-    setInspectingFileName(file.name);
-    setInspectingPhase('正在读取本地时序表格文件...');
+    const fileName = file.name;
+    const ext = fileName.split('.').pop()?.toLowerCase() || '';
+
+    setInspectingFileName(fileName);
     setIsInspecting(true);
     setIsLoading(true);
     setErrorMsg(null);
+
     try {
       if (isTauri()) {
         const possiblePath = (file as any).path;
-        if (possiblePath && typeof possiblePath === 'string' && (possiblePath.startsWith('/') || possiblePath.includes(':\\'))) {
-          setInspectingPhase('正在解析表格字段与时间周期...');
-          const res = await inspectCsv(possiblePath);
-          applyInspection(res);
-          setCurrentStep(2);
+        if (
+          possiblePath &&
+          typeof possiblePath === 'string' &&
+          (possiblePath.startsWith('/') || possiblePath.includes(':\\'))
+        ) {
+          await processLocalFilePath(possiblePath);
           return;
         }
-        // Save content to local temp file to ensure downstream inference can access it
-        setInspectingPhase('正在缓存数据并分析时间序列结构...');
-        const content = await file.text();
-        const res = await uploadCsvContent(file.name, content);
+      }
+
+      if (['xlsx', 'xls', 'ods', 'xlsb'].includes(ext)) {
+        setInspectingPhase('正在解析 Excel 工作表并转换时序格式...');
+        const buffer = await file.arrayBuffer();
+        const info = parseExcelBuffer(buffer);
+        setExcelBuffer(buffer);
+        setExcelWorkbook(info);
+        setExcelFileName(fileName);
+        const cleanCsvName = fileName.replace(/\.[^/.]+$/, '') + '.csv';
+        const res = await uploadCsvContent(cleanCsvName, info.csvContent);
+        applyInspection(res);
+        setCurrentStep(2);
+      } else if (ext === 'json') {
+        setInspectingPhase('正在解析 JSON 格式时序数据...');
+        const text = await file.text();
+        const parsed = parsePastedText(text);
+        if (!parsed.success) {
+          throw new Error(parsed.error || 'JSON 格式解析失败');
+        }
+        const cleanCsvName = fileName.replace(/\.json$/i, '') + '.csv';
+        const res = await uploadCsvContent(cleanCsvName, parsed.csvContent);
+        applyInspection(res);
+        setCurrentStep(2);
+      } else if (['tsv', 'txt'].includes(ext)) {
+        setInspectingPhase('正在分析文本分隔符与时序字段...');
+        const text = await file.text();
+        const parsed = parsePastedText(text);
+        const contentToUpload = parsed.success ? parsed.csvContent : text;
+        const res = await uploadCsvContent(fileName, contentToUpload);
         applyInspection(res);
         setCurrentStep(2);
       } else {
-        const res = await inspectCsv(file.name);
+        // Standard CSV
+        setInspectingPhase('正在缓存数据并分析时间序列结构...');
+        const content = await file.text();
+        const res = await uploadCsvContent(fileName, content);
         applyInspection(res);
         setCurrentStep(2);
       }
     } catch (err: any) {
-      setErrorMsg(`读取 CSV 失败: ${err.toString()}`);
+      setErrorMsg(`读取时序数据失败: ${err.toString()}`);
+    } finally {
+      setIsLoading(false);
+      setIsInspecting(false);
+    }
+  };
+
+  // Switch sheet for multi-sheet Excel
+  const handleSwitchExcelSheet = async (sheetName: string) => {
+    if (!excelBuffer || !excelFileName) return;
+    setInspectingFileName(`${excelFileName} [${sheetName}]`);
+    setInspectingPhase(`正在切换工作表 [${sheetName}] 并解析数据...`);
+    setIsInspecting(true);
+    setIsLoading(true);
+    setErrorMsg(null);
+    try {
+      const info = parseExcelBuffer(excelBuffer, sheetName);
+      setExcelWorkbook(info);
+      const cleanName = `${excelFileName.replace(/\.[^/.]+$/, '')}_${sheetName}.csv`;
+      const res = await uploadCsvContent(cleanName, info.csvContent);
+      applyInspection(res);
+    } catch (err: any) {
+      setErrorMsg(`切换工作表失败: ${err.toString()}`);
+    } finally {
+      setIsLoading(false);
+      setIsInspecting(false);
+    }
+  };
+
+  // Auto-parse pasted text whenever it changes
+  useEffect(() => {
+    if (!pastedText.trim()) {
+      setPasteResult(null);
+      return;
+    }
+    const res = parsePastedText(pastedText);
+    setPasteResult(res);
+  }, [pastedText]);
+
+  // Import pasted data
+  const handleImportPastedData = async () => {
+    if (!pasteResult || !pasteResult.success) return;
+    setInspectingFileName('快速粘贴时序数据');
+    setInspectingPhase('正在将粘贴数据转换为标准时序表...');
+    setIsInspecting(true);
+    setIsLoading(true);
+    setErrorMsg(null);
+    try {
+      const res = await uploadCsvContent('pasted_timeseries.csv', pasteResult.csvContent);
+      applyInspection(res);
+      setCurrentStep(2);
+    } catch (err: any) {
+      setErrorMsg(`导入粘贴数据失败: ${err.toString()}`);
     } finally {
       setIsLoading(false);
       setIsInspecting(false);
@@ -487,20 +625,10 @@ export function App() {
         setErrorMsg(null);
         const path = await pickCsvFile();
         if (path) {
-          const name = path.split('/').pop() || path.split('\\').pop() || '时序数据.csv';
-          setInspectingFileName(name);
-          setInspectingPhase('正在扫描表格字段、识别时间列与采样周期...');
-          setIsInspecting(true);
-          setIsLoading(true);
-          const res = await inspectCsv(path);
-          applyInspection(res);
-          setCurrentStep(2);
+          await processLocalFilePath(path);
         }
       } catch (err: any) {
-        setErrorMsg(`读取 CSV 失败: ${err.toString()}`);
-      } finally {
-        setIsLoading(false);
-        setIsInspecting(false);
+        setErrorMsg(`选择文件失败: ${err.toString()}`);
       }
       return;
     }
@@ -773,81 +901,301 @@ export function App() {
         {/* STEP 1: IMPORT DATA                                                      */}
         {/* ========================================================================= */}
         {currentStep === 1 && (
-          <div className="space-y-8 max-w-4xl mx-auto">
-            {/* Upload Canvas Card */}
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-8 sm:p-10 shadow-xs">
-              <div
-                onClick={isInspecting ? undefined : handlePickFile}
-                onDragOver={isInspecting ? undefined : handleDragOver}
-                onDragLeave={isInspecting ? undefined : handleDragLeave}
-                onDrop={isInspecting ? undefined : handleDrop}
-                className={`block border-2 border-dashed ${
-                  isInspecting
-                    ? 'border-indigo-400 bg-indigo-50/40 cursor-wait'
-                    : isDragOver
-                    ? 'border-indigo-500 bg-indigo-50/50 scale-[1.005] cursor-pointer'
-                    : 'border-slate-300 hover:border-indigo-500 bg-slate-50/50 hover:bg-indigo-50/20 cursor-pointer'
-                } rounded-2xl py-12 px-6 transition-all duration-150 text-center group relative overflow-hidden`}
-              >
-                {isInspecting ? (
-                  <div className="space-y-4 py-2 animate-in fade-in zoom-in-95 duration-150">
-                    <div className="w-14 h-14 rounded-2xl bg-indigo-100 border border-indigo-200 text-indigo-700 shadow-sm flex items-center justify-center mx-auto">
-                      <RefreshCw className="w-7 h-7 animate-spin text-indigo-600" />
-                    </div>
-                    <div>
-                      <div className="text-base font-bold text-slate-950 flex items-center justify-center gap-2">
-                        <span>正在解析时序数据表格</span>
-                        <span className="text-xs font-mono font-bold text-indigo-700 bg-indigo-100/80 px-2.5 py-0.5 rounded-full border border-indigo-200">
-                          {inspectElapsedSec.toFixed(1)}s
-                        </span>
-                      </div>
-                      <div className="text-xs font-semibold text-indigo-800 mt-1.5 flex items-center justify-center gap-1.5">
-                        <FileSpreadsheet className="w-3.5 h-3.5" />
-                        <span className="font-mono">{inspectingFileName}</span>
-                      </div>
-                      <div className="text-xs text-slate-500 mt-2 max-w-md mx-auto leading-relaxed">
-                        {inspectingPhase}
-                      </div>
-                    </div>
-
-                    <div className="max-w-xs mx-auto pt-1">
-                      <div className="w-full h-1.5 bg-indigo-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-indigo-600 rounded-full animate-pulse w-3/4 mx-auto" />
-                      </div>
-                    </div>
-
-                    <div className="inline-flex items-center gap-2 bg-slate-200 text-slate-500 text-xs font-semibold px-6 py-2.5 rounded-xl border border-slate-300 select-none">
-                      <RefreshCw className="w-4 h-4 animate-spin text-slate-500" />
-                      <span>正在扫描字段类型与推断时间周期...</span>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 shadow-xs flex items-center justify-center group-hover:scale-105 group-hover:bg-indigo-100 transition-all mx-auto mb-4">
-                      <Upload className="w-6 h-6" />
-                    </div>
-                    <div className="text-base font-bold text-slate-900 group-hover:text-indigo-900 transition-colors">
-                      {isDragOver ? '松开鼠标即可导入时序数据' : '拖拽 CSV 文件至此处，或点击浏览本地文件'}
-                    </div>
-                    <div className="text-xs text-slate-500 mt-1.5 mb-6 max-w-md mx-auto leading-relaxed">
-                      支持各类业务时序数据（销售额、库存、用电量、服务器指标等，带表头与时间列即可）
-                    </div>
-
-                    <div className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-6 py-2.5 rounded-xl shadow-xs transition-all duration-150 hover:shadow">
-                      <FileSpreadsheet className="w-4 h-4" />
-                      <span>选择 CSV 文件</span>
-                    </div>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept=".csv,.tsv,.txt"
-                      onChange={handleFileUpload}
-                      className="hidden"
-                    />
-                  </>
-                )}
+          <div className="space-y-6 max-w-4xl mx-auto">
+            {/* Ingestion Mode Switcher */}
+            <div className="flex items-center justify-center">
+              <div className="flex items-center p-1 bg-slate-100/90 rounded-2xl border border-slate-200 shadow-2xs">
+                <button
+                  type="button"
+                  onClick={() => setInputMode('file')}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                    inputMode === 'file'
+                      ? 'bg-white text-indigo-700 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <FileSpreadsheet className="w-4 h-4 text-indigo-600" />
+                  <span>本地文件导入</span>
+                  <span className="text-[10px] font-mono text-slate-400 font-normal">
+                    CSV / Excel / TSV / JSON
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInputMode('paste')}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                    inputMode === 'paste'
+                      ? 'bg-white text-indigo-700 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <ClipboardPaste className="w-4 h-4 text-indigo-600" />
+                  <span>直接粘贴 / 快速录入</span>
+                  <span className="text-[10px] bg-indigo-50 text-indigo-700 font-semibold px-2 py-0.5 rounded-full border border-indigo-200">
+                    智能解析
+                  </span>
+                </button>
               </div>
             </div>
+
+            {/* Mode 1: File Upload Canvas */}
+            {inputMode === 'file' && (
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-8 sm:p-10 shadow-xs space-y-4">
+                <div
+                  onClick={isInspecting ? undefined : handlePickFile}
+                  onDragOver={isInspecting ? undefined : handleDragOver}
+                  onDragLeave={isInspecting ? undefined : handleDragLeave}
+                  onDrop={isInspecting ? undefined : handleDrop}
+                  className={`block border-2 border-dashed ${
+                    isInspecting
+                      ? 'border-indigo-400 bg-indigo-50/40 cursor-wait'
+                      : isDragOver
+                      ? 'border-indigo-500 bg-indigo-50/50 scale-[1.005] cursor-pointer'
+                      : 'border-slate-300 hover:border-indigo-500 bg-slate-50/50 hover:bg-indigo-50/20 cursor-pointer'
+                  } rounded-2xl py-10 px-6 transition-all duration-150 text-center group relative overflow-hidden`}
+                >
+                  {isInspecting ? (
+                    <div className="space-y-4 py-2 animate-in fade-in zoom-in-95 duration-150">
+                      <div className="w-14 h-14 rounded-2xl bg-indigo-100 border border-indigo-200 text-indigo-700 shadow-sm flex items-center justify-center mx-auto">
+                        <RefreshCw className="w-7 h-7 animate-spin text-indigo-600" />
+                      </div>
+                      <div>
+                        <div className="text-base font-bold text-slate-950 flex items-center justify-center gap-2">
+                          <span>正在解析时序数据文件</span>
+                          <span className="text-xs font-mono font-bold text-indigo-700 bg-indigo-100/80 px-2.5 py-0.5 rounded-full border border-indigo-200">
+                            {inspectElapsedSec.toFixed(1)}s
+                          </span>
+                        </div>
+                        <div className="text-xs font-semibold text-indigo-800 mt-1.5 flex items-center justify-center gap-1.5">
+                          <FileSpreadsheet className="w-3.5 h-3.5" />
+                          <span className="font-mono">{inspectingFileName}</span>
+                        </div>
+                        <div className="text-xs text-slate-500 mt-2 max-w-md mx-auto leading-relaxed">
+                          {inspectingPhase}
+                        </div>
+                      </div>
+
+                      <div className="max-w-xs mx-auto pt-1">
+                        <div className="w-full h-1.5 bg-indigo-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-indigo-600 rounded-full animate-pulse w-3/4 mx-auto" />
+                        </div>
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 bg-slate-200 text-slate-500 text-xs font-semibold px-6 py-2.5 rounded-xl border border-slate-300 select-none">
+                        <RefreshCw className="w-4 h-4 animate-spin text-slate-500" />
+                        <span>正在扫描字段类型与推断时间周期...</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 shadow-xs flex items-center justify-center group-hover:scale-105 group-hover:bg-indigo-100 transition-all mx-auto mb-4">
+                        <Upload className="w-6 h-6" />
+                      </div>
+                      <div className="text-base font-bold text-slate-900 group-hover:text-indigo-900 transition-colors">
+                        {isDragOver ? '松开鼠标即可导入时序数据' : '拖拽数据文件至此处，或点击浏览本地文件'}
+                      </div>
+                      <div className="text-xs text-slate-500 mt-1.5 mb-5 max-w-md mx-auto leading-relaxed">
+                        原生支持各类业务时序数据，包含日期/时间列与数值指标即可自动解析
+                      </div>
+
+                      {/* Format Badges */}
+                      <div className="flex items-center justify-center gap-2 flex-wrap max-w-lg mx-auto mb-6">
+                        <span className="text-[11px] font-semibold bg-white text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs flex items-center gap-1">
+                          <FileSpreadsheet className="w-3 h-3 text-emerald-600" />
+                          <span>CSV (.csv)</span>
+                        </span>
+                        <span className="text-[11px] font-semibold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-lg border border-emerald-200/80 shadow-2xs flex items-center gap-1">
+                          <FileSpreadsheet className="w-3 h-3 text-emerald-600" />
+                          <span>Excel (.xlsx / .xls)</span>
+                        </span>
+                        <span className="text-[11px] font-semibold bg-white text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs flex items-center gap-1">
+                          <FileText className="w-3 h-3 text-blue-600" />
+                          <span>TSV 制表符 (.tsv)</span>
+                        </span>
+                        <span className="text-[11px] font-semibold bg-white text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs flex items-center gap-1">
+                          <FileText className="w-3 h-3 text-slate-600" />
+                          <span>纯文本 (.txt)</span>
+                        </span>
+                        <span className="text-[11px] font-semibold bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg border border-amber-200/80 shadow-2xs flex items-center gap-1">
+                          <FileCode className="w-3 h-3 text-amber-600" />
+                          <span>JSON 结构 (.json)</span>
+                        </span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-6 py-2.5 rounded-xl shadow-xs transition-all duration-150 hover:shadow">
+                        <FileSpreadsheet className="w-4 h-4" />
+                        <span>选择时序文件 (CSV / Excel / TSV / JSON)</span>
+                      </div>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept=".csv,.tsv,.txt,.xlsx,.xls,.ods,.xlsb,.json"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                      />
+                    </>
+                  )}
+                </div>
+
+                {/* Multi-sheet Excel Banner if active */}
+                {excelWorkbook && excelWorkbook.sheetNames.length > 1 && (
+                  <div className="bg-emerald-50/90 border border-emerald-200 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <Layers className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-emerald-950 flex items-center gap-2">
+                          <span>Excel 工作簿多 Sheet 支持</span>
+                          <span className="text-[10px] bg-emerald-200/70 text-emerald-900 px-2 py-0.2 rounded-full">
+                            共 {excelWorkbook.sheetNames.length} 个工作表
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-emerald-700">
+                          当前工作表：<strong className="font-mono">{excelWorkbook.activeSheet}</strong>，可点击右侧随时切换
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-emerald-900">切换工作表:</span>
+                      <select
+                        value={excelWorkbook.activeSheet}
+                        onChange={(e) => handleSwitchExcelSheet(e.target.value)}
+                        className="bg-white border border-emerald-300 text-xs font-bold text-emerald-950 px-3 py-1.5 rounded-xl shadow-2xs focus:ring-2 focus:ring-emerald-500 focus:outline-hidden"
+                      >
+                        {excelWorkbook.sheetNames.map((name) => (
+                          <option key={name} value={name}>
+                            {name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Mode 2: Quick Direct Paste / Manual Input */}
+            {inputMode === 'paste' && (
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-xs space-y-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                      <ClipboardPaste className="w-4 h-4 text-indigo-600" />
+                      <span>直接粘贴时序文本 / 数值</span>
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      支持直接粘贴从 Excel 复制的单元格、纯数值序列、JSON 数组或逗号/Tab分隔文本
+                    </p>
+                  </div>
+                  {/* Preset Demo Chips */}
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-indigo-500" />
+                      <span>示例填入:</span>
+                    </span>
+                    {PASTE_DEMO_PRESETS.map((demo) => (
+                      <button
+                        key={demo.id}
+                        type="button"
+                        onClick={() => setPastedText(demo.text)}
+                        className="text-[11px] font-medium bg-slate-50 hover:bg-indigo-50 hover:text-indigo-700 text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200 hover:border-indigo-200 transition-colors"
+                        title={demo.desc}
+                      >
+                        {demo.title}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Textarea Input */}
+                <div className="relative">
+                  <textarea
+                    rows={9}
+                    value={pastedText}
+                    onChange={(e) => setPastedText(e.target.value)}
+                    placeholder={`在此直接粘贴您的时序数据，例如：\n1. 从 Excel / WPS 复制的多列单元格 (Tab 分隔)\n2. 纯数值序列 (例如：102.5\\n104.2\\n108.0... 或逗号分隔)\n3. JSON 数组 (例如：[{"date": "2024-01-01", "sales": 100}, ...] 或 [12.5, 14.2, 16.8])\n4. 标准 CSV 文本内容`}
+                    className="w-full font-mono text-xs text-slate-800 bg-slate-50/80 hover:bg-slate-50 focus:bg-white border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl p-4 transition-all focus:outline-hidden leading-relaxed resize-y"
+                  />
+                  {pastedText && (
+                    <div className="absolute right-3 bottom-3 flex items-center gap-2">
+                      <span className="text-[10px] font-mono text-slate-400 bg-white/90 px-2 py-0.5 rounded border border-slate-200">
+                        {pastedText.length} 字符 · {pastedText.split('\n').length} 行
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setPastedText('')}
+                        className="text-[11px] text-slate-400 hover:text-slate-600 px-1.5 py-0.5 hover:underline"
+                      >
+                        清空
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Live Parsing Feedback & Preview */}
+                {pasteResult && (
+                  <div className="space-y-4 animate-in fade-in duration-150">
+                    {pasteResult.success ? (
+                      <div className="bg-indigo-50/60 border border-indigo-200/80 rounded-xl p-4 space-y-3">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-lg border border-emerald-200">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                              <span>已成功识别格式：{pasteResult.formatName}</span>
+                            </span>
+                            <span className="text-xs text-indigo-900 font-mono">
+                              ({pasteResult.totalRows} 行 × {pasteResult.totalColumns} 列)
+                            </span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={handleImportPastedData}
+                            disabled={isInspecting}
+                            className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-xs transition-all hover:shadow cursor-pointer disabled:opacity-50"
+                          >
+                            <span>确认导入此数据并进入下一步</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                        <p className="text-xs text-indigo-700/90">{pasteResult.formatDescription}</p>
+
+                        {/* Mini Data Preview */}
+                        <div className="overflow-x-auto border border-indigo-100 bg-white rounded-lg shadow-2xs">
+                          <table className="w-full text-xs text-left">
+                            <thead className="bg-indigo-50/50 text-indigo-900 font-semibold border-b border-indigo-100 text-[11px]">
+                              <tr>
+                                {pasteResult.previewHeaders.slice(0, 8).map((h, idx) => (
+                                  <th key={idx} className="px-3 py-1.5">
+                                    {h}
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-indigo-50 font-mono text-slate-700 text-xs">
+                              {pasteResult.previewRows.slice(0, 4).map((row, rIdx) => (
+                                <tr key={rIdx} className="hover:bg-indigo-50/30">
+                                  {row.slice(0, 8).map((cell, cIdx) => (
+                                    <td key={cIdx} className="px-3 py-1.5 truncate max-w-[150px]">
+                                      {cell}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3.5 text-xs flex items-center gap-2.5">
+                        <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                        <span>{pasteResult.error || '无法识别当前粘贴的内容，请确认包含分隔符或有效数值。'}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* If data was already inspected, show preview table */}
             {inspection && (

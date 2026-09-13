@@ -17,6 +17,8 @@ pub fn run() {
             commands::inspect_csv,
             commands::pick_csv_file,
             commands::upload_csv_content,
+            commands::read_file_binary,
+            commands::read_file_text,
             commands::load_sample_dataset,
             commands::run_forecast,
             commands::export_forecast_csv,

@@ -217,13 +217,39 @@ pub async fn inspect_csv(file_path: String) -> Result<CsvInspectionResult, Strin
 }
 
 #[tauri::command]
+pub async fn read_file_binary(file_path: String) -> Result<Vec<u8>, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let p = PathBuf::from(&file_path);
+        if !p.exists() {
+            return Err(format!("文件不存在: {file_path}"));
+        }
+        std::fs::read(&p).map_err(|e| format!("读取文件字节失败: {e}"))
+    })
+    .await
+    .map_err(|e| format!("读取文件任务异常: {e}"))?
+}
+
+#[tauri::command]
+pub async fn read_file_text(file_path: String) -> Result<String, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let p = PathBuf::from(&file_path);
+        if !p.exists() {
+            return Err(format!("文件不存在: {file_path}"));
+        }
+        std::fs::read_to_string(&p).map_err(|e| format!("读取文件文本内容失败: {e}"))
+    })
+    .await
+    .map_err(|e| format!("读取文件任务异常: {e}"))?
+}
+
+#[tauri::command]
 pub async fn pick_csv_file() -> Result<Option<String>, String> {
     tauri::async_runtime::spawn_blocking(move || {
         #[cfg(target_os = "macos")]
         {
             let script = r#"
                 try
-                    set chosenFile to choose file with prompt "请选择要预测的时序数据 CSV 文件" of type {"csv", "tsv", "txt", "public.comma-separated-values-text", "public.plain-text", "text"}
+                    set chosenFile to choose file with prompt "请选择要预测的时序数据文件 (CSV/Excel/TSV/TXT/JSON)" of type {"csv", "tsv", "txt", "xlsx", "xls", "json", "public.comma-separated-values-text", "public.plain-text", "public.json", "org.openxmlformats.spreadsheetml.sheet", "com.microsoft.excel.xls"}
                     return POSIX path of chosenFile
                 on error
                     return ""
@@ -243,7 +269,30 @@ pub async fn pick_csv_file() -> Result<Option<String>, String> {
             }
             Ok(None)
         }
-        #[cfg(not(target_os = "macos"))]
+        #[cfg(target_os = "windows")]
+        {
+            let script = r#"
+                Add-Type -AssemblyName System.Windows.Forms
+                $dialog = New-Object System.Windows.Forms.OpenFileDialog
+                $dialog.Title = "请选择要预测的时序数据文件"
+                $dialog.Filter = "时序数据文件 (*.csv;*.xlsx;*.xls;*.tsv;*.txt;*.json)|*.csv;*.xlsx;*.xls;*.tsv;*.txt;*.json|所有文件 (*.*)|*.*"
+                if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
+                    Write-Output $dialog.FileName
+                }
+            "#;
+            let output = std::process::Command::new("powershell")
+                .args(["-NoProfile", "-Command", script])
+                .output()
+                .map_err(|e| format!("调用 Windows 文件选择器失败: {e}"))?;
+            if output.status.success() {
+                let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
+                if !path.is_empty() {
+                    return Ok(Some(path));
+                }
+            }
+            Ok(None)
+        }
+        #[cfg(not(any(target_os = "macos", target_os = "windows")))]
         {
             Ok(None)
         }

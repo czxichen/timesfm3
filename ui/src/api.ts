@@ -90,6 +90,21 @@ export async function uploadCsvContent(
   return getMockInspection(fileName);
 }
 
+export async function readFileBinary(filePath: string): Promise<Uint8Array> {
+  if (isTauri()) {
+    const raw = await tauriInvoke<number[]>('read_file_binary', { filePath });
+    return new Uint8Array(raw);
+  }
+  throw new Error('当前非桌面环境不支持直接读取本地文件');
+}
+
+export async function readFileText(filePath: string): Promise<string> {
+  if (isTauri()) {
+    return tauriInvoke<string>('read_file_text', { filePath });
+  }
+  throw new Error('当前非桌面环境不支持直接读取本地文件');
+}
+
 export async function loadSampleDataset(sampleKey: string): Promise<CsvInspectionResult> {
   if (isTauri()) {
     return tauriInvoke<CsvInspectionResult>('load_sample_dataset', { sampleKey });

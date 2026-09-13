@@ -119,17 +119,42 @@ pub fn resolve_csv_path<P: AsRef<Path>>(path: P) -> Result<std::path::PathBuf, S
     ))
 }
 
-/// Inspects a CSV file and produces detailed metadata for GUI mapping guidance.
+/// Auto-detect delimiter from the first line of a file (supports comma, tab, semicolon, pipe)
+pub fn detect_delimiter<P: AsRef<Path>>(path: P) -> u8 {
+    if let Ok(file) = std::fs::File::open(path) {
+        use std::io::{BufRead, BufReader};
+        let mut reader = BufReader::new(file);
+        let mut first_line = String::new();
+        if reader.read_line(&mut first_line).is_ok() {
+            let tabs = first_line.chars().filter(|&c| c == '\t').count();
+            let commas = first_line.chars().filter(|&c| c == ',').count();
+            let semicolons = first_line.chars().filter(|&c| c == ';').count();
+            let pipes = first_line.chars().filter(|&c| c == '|').count();
+            if tabs > commas && tabs >= semicolons && tabs >= pipes {
+                return b'\t';
+            } else if semicolons > commas && semicolons >= tabs && semicolons >= pipes {
+                return b';';
+            } else if pipes > commas && pipes >= tabs && pipes >= semicolons {
+                return b'|';
+            }
+        }
+    }
+    b','
+}
+
+/// Inspects a CSV/TSV/TXT file and produces detailed metadata for GUI mapping guidance.
 pub fn inspect_csv<P: AsRef<Path>>(path: P) -> Result<CsvInspectionResult, String> {
     let resolved_path = resolve_csv_path(path)?;
     let path_ref = resolved_path.as_path();
     let file_path = path_ref.to_string_lossy().to_string();
 
+    let delimiter = detect_delimiter(path_ref);
     let mut reader = csv::ReaderBuilder::new()
         .has_headers(true)
         .flexible(true)
+        .delimiter(delimiter)
         .from_path(path_ref)
-        .map_err(|e| format!("无法打开 CSV 文件: {e}"))?;
+        .map_err(|e| format!("无法打开数据表格文件: {e}"))?;
 
     let headers_record = reader
         .headers()
@@ -258,7 +283,12 @@ pub fn inspect_csv<P: AsRef<Path>>(path: P) -> Result<CsvInspectionResult, Strin
 }
 
 fn infer_frequency_from_date_col<P: AsRef<Path>>(path: P, date_col_name: &str) -> (Option<String>, Option<usize>) {
-    let mut reader = match csv::ReaderBuilder::new().has_headers(true).from_path(path) {
+    let delimiter = detect_delimiter(&path);
+    let mut reader = match csv::ReaderBuilder::new()
+        .has_headers(true)
+        .flexible(true)
+        .delimiter(delimiter)
+        .from_path(path) {
         Ok(r) => r,
         Err(_) => return (None, None),
     };
@@ -413,11 +443,13 @@ pub fn load_series_for_inference<P: AsRef<Path>>(
         return Ok((flat, (num_vars, col_len), fake_timestamps, None));
     }
 
+    let delimiter = detect_delimiter(&path);
     let mut reader = csv::ReaderBuilder::new()
         .has_headers(true)
         .flexible(true)
+        .delimiter(delimiter)
         .from_path(&path)
-        .map_err(|e| format!("读取 CSV 失败: {e}"))?;
+        .map_err(|e| format!("读取数据表格失败: {e}"))?;
 
     let headers = reader.headers().map_err(|e| e.to_string())?.clone();
     let header_list: Vec<String> = headers.iter().map(|s| s.trim().to_string()).collect();
